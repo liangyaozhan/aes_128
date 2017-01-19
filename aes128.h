@@ -1,10 +1,22 @@
-# AES-128
+/*
+ *
+ * Chinese Academy of Sciences
+ * State Key Laboratory of Information Security
+ * Institute of Information Engineering
+ *
+ * Copyright (C) 2016 Chinese Academy of Sciences
+ *
+ * lyzh, 2017-01-18, change api. ivws02@126.com
+ * LuoPeng, luopeng@iie.ac.cn
+ * Updated in May 2016
+ *
+ */
+#ifndef AES_128_H
+#define AES_128_H
 
-[![Build Status](https://travis-ci.org/openluopworld/aes_128.svg?branch=master)](https://travis-ci.org/openluopworld/aes_128) [![Coverity Scan Build Status](https://img.shields.io/coverity/scan/11502.svg)](https://scan.coverity.com/projects/openluopworld-aes_128)
+#include <stdio.h>
+#include <stdint.h>
 
-C implementation of AES-128. THis code has been tested with valgrind-3.11.0.
-
-```C
 /**
  * \brief aes128 structrue
  *
@@ -12,11 +24,11 @@ C implementation of AES-128. THis code has been tested with valgrind-3.11.0.
  */
 struct aes128
 {
-    uint8_t roundkeys[176;
+    uint8_t roundkeys[176];
 };
 
-void aes128_init(struct aes_crypt *p_this);
-void aes128_destroy(struct aes_crypt *p_this);
+void aes128_init(struct aes128 *p_this);
+void aes128_destroy(struct aes128 *p_this);
 
 /**
  * \brief set key
@@ -26,7 +38,9 @@ void aes128_destroy(struct aes_crypt *p_this);
  * @par[in]key:         16 bytes of master keys
  * @par[out]roundkeys:  176 bytes of round keys
  */
-void aes128_set_key(struct aes_crypt *p_this, const uint8_t key[16] );
+void aes128_set_key(struct aes128 *p_this, const uint8_t key[16] );
+
+int aes128_block_size(struct aes128 *p_this);
 
 /**
  * @purpose:            Encryption. The length of plain and cipher should be one block (16 bytes).
@@ -35,7 +49,7 @@ void aes128_set_key(struct aes_crypt *p_this, const uint8_t key[16] );
  * @par[in]plaintext:   plain text
  * @par[out]ciphertext: cipher text
  */
-void aes128_encrypt(const struct aes_crypt *p_this, uint8_t *ciphertext, const uint8_t *plaintext );
+void aes128_encrypt(const struct aes128 *p_this, uint8_t *ciphertext, const uint8_t *plaintext );
 
 /**
  * @purpose:            Decryption. The length of plain and cipher should be one block (16 bytes).
@@ -44,6 +58,6 @@ void aes128_encrypt(const struct aes_crypt *p_this, uint8_t *ciphertext, const u
  * @par[in]ciphertext:  cipher text
  * @par[out]plaintext:  plain text
  */
-void aes128_decrypt(const struct aes_crypt *p_this, uint8_t *plaintext, const uint8_t *ciphertext );
+void aes128_decrypt(const struct aes128 *p_this, uint8_t *plaintext, const uint8_t *ciphertext );
 
-```
+#endif
