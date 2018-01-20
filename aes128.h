@@ -17,6 +17,10 @@
 #include <stdio.h>
 #include <stdint.h>
 
+#ifdef __cplusplus
+extern "C"{
+#endif
+
 /**
  * \brief aes128 structrue
  *
@@ -59,5 +63,10 @@ void aes128_encrypt(const struct aes128 *p_this, uint8_t *ciphertext, const uint
  * @par[out]plaintext:  plain text
  */
 void aes128_decrypt(const struct aes128 *p_this, uint8_t *plaintext, const uint8_t *ciphertext );
+
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif
